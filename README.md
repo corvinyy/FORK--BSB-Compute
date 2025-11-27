@@ -48,21 +48,13 @@ O objetivo é reproduzir o cenário de empresas de IA em nuvem, lidando com múl
     style="padding-right: 10px;" 
     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" 
 />
-<img 
-    align="left" 
-    alt="pycharm" 
-    title="PyCharm"
-    width="30px" 
+<img
+    align="left"
+    alt="github"
+    tittle="GitHub"
+    width="30px"
     style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pycharm/pycharm-original.svg" 
-/>
-<img 
-    align="left" 
-    alt="github" 
-    title="GitHub"
-    width="30px" 
-    style="padding-right: 10px;" 
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" 
+    src="https://skillicons.dev/icons?i=github"
 />
 <br><br>
 ---
