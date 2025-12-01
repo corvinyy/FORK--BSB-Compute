@@ -17,7 +17,6 @@ REQUISIÇÕES_INICIAIS = [
     {"id": 103, "tipo": "vaz", "prioridade": 1, "tempo_exec": 5, "chegada": 0},
     {"id": 104, "tipo": "nlp", "prioridade": 2, "tempo_exec": 4, "chegada": 0},
     {"id": 105, "tipo": "imagem", "prioridade": 1, "tempo_exec": 9, "chegada": 0},
-    
 ]
 
 # Contador global para IDs de novas requisições aleatórias
@@ -48,3 +47,33 @@ def simular_chegada_aleatoria(tempo_atual):
         print(f"Requisição {id_nova} (P:{prioridade}, T_exec:{tempo_exec}) CHEGOU.")
             
     return novas_chegadas
+
+def passo_simulação(servidores, fila_execucao, fila_concluídas, tempo_atual):
+    tarefas_concluidas = []
+
+    # Workers executam e diminuem o tempo restante
+    for req in list(fila_execucao): 
+        req['tempo_restante'] -= 1
+        
+        # Tarefas que são completas vão para uma lista separada
+        if req['tempo_restante'] <= 0:
+            tarefas_concluidas.append(req)
+            fila_execucao.remove(req)
+            
+    # Verificação da capacidade dos servidores
+    for req_concluida in tarefas_concluidas:
+        servidor_id = req_concluida['servidor_id']
+        for s in servidores:
+            if s['id'] == servidor_id:
+                s['capacidade_uso'] -= 1 # Capacidade liberada
+                break
+        
+        # Cálculo de tempo de resposta para monitoramento de cada processo
+        tempo_resposta = tempo_atual - req_concluida['chegada']
+        req_concluida['tempo_resposta'] = tempo_resposta
+        req_concluida['estado'] = 'concluída'
+        fila_concluídas.append(req_concluida)
+        
+        print(f"Requisição {req_concluida['id']} CONCLUÍDA (Resposta: {tempo_resposta}s). Servidor {servidor_id} liberado.")
+
+    return len(tarefas_concluidas)
